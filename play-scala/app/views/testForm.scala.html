@@ -1,0 +1,77 @@
+@* @import play.api.data._ *@
+@* @import play.api.data.Forms._ *@
+@import controllers.Application
+@* //@import widgets._ *@
+@(userForm: Form[UserData], success:Boolean = false, name:Option[String])(implicit flash: Flash)
+@*val userForm = Form(*@
+@*mapping(*@
+@*"name" -> text,*@
+@*"age" -> number(min = 0, max = 130),*@
+@*"conactNumber" -> text,*@
+@*"email" -> email*@
+@*)(UserData.apply)(UserData.unapply)*@
+@*)*@
+
+
+
+@helper.form(action = routes.Application.userPost, 'id -> "myForm",'onsubmit -> "return validateForm()") {
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/main.css")"/>
+    <script type="application/javascript">
+            function validateForm() {
+                var name = document.forms["myForm"]["name"].value;
+                var age = document.forms["myForm"]["age"].value;
+                var contactNumber = document.forms["myForm"]["contactNumber"].value;
+                var email = document.forms["myForm"]["email"].value;
+
+                if (name.length > 32) {
+                    alert("name is too long please adjust to less than 32 characters");
+                    return false;
+                }
+            }
+
+            window.addEventListener("load", function(){
+                alert("im ready")
+            });
+    </script>
+
+    @if(!success) {
+        <h1>
+        @flash.get("success").getOrElse("Welcome! Please enter your details below")
+        </h1>
+        <div style="width: 400px">
+            <ul style="list-style: none;">
+                <li>
+                    <span>Name :</span>
+                    <input id="name" name="name" class="formItem" required/>
+                </li>
+                <br/>
+                <li>
+                    <span>Age :</span>
+                    <input id="age" name="age" class="formItem" required/>
+                </li>
+                <br/>
+                <li>
+                    <span>Contact Number :</span>
+                    <input id="contactNumber" name="contactNumber" class="formItem" required/>
+                </li>
+                <br/>
+                <li>
+                    <span>Email :</span>
+                    <input id="email" name="email" class="formItem" required/>
+                </li>
+                <br/>
+                <button id="submit-button" type="submit" style="float: right">Submit</button>
+            </ul>
+        </div>
+    }else{
+        <h1>
+            Welcome @name to HELL
+        </h1>
+
+    }
+
+}
+@*<form method="POST" action="/widgets">*@
+@*<h2>TODO form fields</h2>*@
+@*<button type="submit">Create widget</button>*@
+@*</form>*@

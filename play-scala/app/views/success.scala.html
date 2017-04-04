@@ -1,0 +1,21 @@
+@* @import play.api.data._ *@
+@* @import play.api.data.Forms._ *@
+@import controllers.Application
+@* //@import widgets._ *@
+@() @* (implicit messages: Messages) *@
+
+@*val userForm = Form(*@
+@*mapping(*@
+@*"name" -> text,*@
+@*"age" -> number(min = 0, max = 130),*@
+@*"conactNumber" -> text,*@
+@*"email" -> email*@
+@*)(UserData.apply)(UserData.unapply)*@
+@*)*@
+
+<h1>Form submission succeeded!</h1>
+
+@*<form method="POST" action="/widgets">*@
+@*<h2>TODO form fields</h2>*@
+@*<button type="submit">Create widget</button>*@
+@*</form>*@
