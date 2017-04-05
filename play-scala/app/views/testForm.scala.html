@@ -2,7 +2,7 @@
 @* @import play.api.data.Forms._ *@
 @import controllers.Application
 @* //@import widgets._ *@
-@(userForm: Form[UserData], success:Boolean = false, name:Option[String])(implicit flash: Flash)
+@(userForm: Form[UserData], success:Boolean = false, data:Option[UserData])(implicit flash: Flash)
 @*val userForm = Form(*@
 @*mapping(*@
 @*"name" -> text,*@
@@ -14,25 +14,62 @@
 
 
 
-@helper.form(action = routes.Application.userPost, 'id -> "myForm",'onsubmit -> "return validateForm()") {
+@helper.form(action = routes.Application.userPost, 'id -> "myForm",'onsubmit -> "return") {
     <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/main.css")"/>
-    <script type="application/javascript">
-            function validateForm() {
-                var name = document.forms["myForm"]["name"].value;
-                var age = document.forms["myForm"]["age"].value;
-                var contactNumber = document.forms["myForm"]["contactNumber"].value;
-                var email = document.forms["myForm"]["email"].value;
+    <script type="text/javascript" src="@routes.Assets.versioned("assets/javascripts/myScript.js")"/>
 
-                if (name.length > 32) {
-                    alert("name is too long please adjust to less than 32 characters");
-                    return false;
-                }
-            }
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
-            window.addEventListener("load", function(){
-                alert("im ready")
-            });
+    @*<script type="text/javascript">*@
+        @*$(document).ready ->*@
+          @*$('#myForm').submit ->*@
+            @*console.log("test")*@
+            @*alert("THIS IS MY CODE")*@
+            @*false*@
+
+    @*</script>*@
+    @*<script type="application/javascript">*@
+        @*$(function() {*@
+           @*$('#myForm').on('submit', function(e) {*@
+               @*e.preventDefault();*@
+               @*var data = $('#myForm').serialize();*@
+               @*$.post("/formsubmit", data, function(myData, status){*@
+              @*//     alert("Data: " + data + "\nStatus: " + status);*@
+               @*})*@
+           @*});*@
+        @*});*@
+        @*
+//            function validateForm() {
+//                var name = document.forms["myForm"]["name"].value;
+//                var age = document.forms["myForm"]["age"].value;
+//                var contactNumber = document.forms["myForm"]["contactNumber"].value;
+//                var email = document.forms["myForm"]["email"].value;
+//
+//                if (name.length > 32) {
+//                    alert("name is too long please adjust to less than 32 characters");
+//
+//                    return false;
+//                }
+
+
+                @*var formData = $("#myForm").submit() {*@
+                        @*$.get(@routes.Application.userPost(), function (data, status) {*@
+                            @*alert("Data: " + data + "\nStatus: " + status);*@
+                        @*});*@
+                    @*};*@
+                @*}*@
+    @*
+//                alert(formData)
+
+//            }
+
+//            window.addEventListener("load", function(){
+//                alert("im ready")
+//            });
+            // alert($("#myForm").serializeArray())
     </script>
+*@
+
 
     @if(!success) {
         <h1>
@@ -43,29 +80,45 @@
                 <li>
                     <span>Name :</span>
                     <input id="name" name="name" class="formItem" required/>
+                    @*<div id="nameAlerts">*@
+
+                    @*</div>*@
                 </li>
                 <br/>
                 <li>
                     <span>Age :</span>
                     <input id="age" name="age" class="formItem" required/>
+                    @*<div id="ageAlerts">*@
+
+                    @*</div>*@
                 </li>
                 <br/>
                 <li>
                     <span>Contact Number :</span>
                     <input id="contactNumber" name="contactNumber" class="formItem" required/>
+                    @*<div >*@
+
+                    @*</div>*@
                 </li>
                 <br/>
                 <li>
                     <span>Email :</span>
                     <input id="email" name="email" class="formItem" required/>
+                    @*<div>*@
+
+                    @*</div>*@
                 </li>
                 <br/>
                 <button id="submit-button" type="submit" style="float: right">Submit</button>
+                <div name="errorDiv">
+
+                </div>
             </ul>
         </div>
     }else{
         <h1>
-            Welcome @name to HELL
+            Welcome @data.map(_.name)
+            @* Welcome @data.fold("")(_.name) *@
         </h1>
 
     }

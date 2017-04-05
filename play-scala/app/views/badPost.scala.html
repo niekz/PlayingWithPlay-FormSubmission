@@ -1,0 +1,125 @@
+@* @import play.api.data._ *@
+@* @import play.api.data.Forms._ *@
+@* @import controllers.Application*@
+@* //@import widgets._ *@
+@* @(userForm: Form[UserData], success:Boolean = false, data:Option[UserData])(implicit flash: Flash)*@
+@* @(data: Option[UserData])
+@*val userForm = Form(*@
+@*mapping(*@
+@*"name" -> text,*@
+@*"age" -> number(min = 0, max = 130),*@
+@*"conactNumber" -> text,*@
+@*"email" -> email*@
+@*)(UserData.apply)(UserData.unapply)*@
+@*)*@
+@*
+    @for(i <- data){
+        <p>@i</p>
+    }
+
+*@
+@* @helper.form(action = routes.Application.userPost, 'id -> "myForm",'onsubmit -> "return") {*@
+    @*<link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/main.css")"/>*@
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>*@
+
+    @*<script type="application/javascript">*@
+            @*$(function() {*@
+                @*$('#myForm').on('submit', function(e) {*@
+                    @*e.preventDefault();*@
+                    @*var data = $('#myForm').serializeArray();*@
+                    @*$.post("/formsubmit"), data, function(myData, status){*@
+                        @*//     alert("Data: " + data + "\nStatus: " + status);*@
+                    @*}*@
+                @*});*@
+            @*});*@
+            @*//            function validateForm() {*@
+            @*//                var name = document.forms["myForm"]["name"].value;*@
+            @*//                var age = document.forms["myForm"]["age"].value;*@
+            @*//                var contactNumber = document.forms["myForm"]["contactNumber"].value;*@
+            @*//                var email = document.forms["myForm"]["email"].value;*@
+            @*//*@
+            @*//                if (name.length > 32) {*@
+            @*//                    alert("name is too long please adjust to less than 32 characters");*@
+            @*//*@
+            @*//                    return false;*@
+            @*//                }*@
+
+
+            @*var formData = $("#myForm").submit() {*@
+            @*$.get(@routes.Application.userPost(), function (data, status) {*@
+            @*alert("Data: " + data + "\nStatus: " + status);*@
+            @*});*@
+            @*};*@
+            @*}*@
+            @*//                alert(formData)*@
+
+            @*//            }*@
+
+            @*//            window.addEventListener("load", function(){*@
+            @*//                alert("im ready")*@
+            @*//            });*@
+            @*// alert($("#myForm").serializeArray())*@
+    @*</script>*@
+
+
+
+    @* @if(!success) {*@
+        @*<script type="application/javascript">*@
+                @*alert(@data.getOrElse(None))*@
+        @*</script>*@
+        @*<h1>*@
+        @* @flash.get("success").getOrElse("Welcome! Please enter your details below")*@
+        @*</h1>*@
+        @*<div style="width: 400px">*@
+            @*<ul style="list-style: none;">*@
+                @*<li>*@
+                    @*<span>Name :</span>*@
+                    @*<input id="name" name="name" class="formItem" required/>*@
+                    @*<div id="nameAlerts">*@
+
+                    @*</div>*@
+                @*</li>*@
+                @*<br/>*@
+                @*<li>*@
+                    @*<span>Age :</span>*@
+                    @*<input id="age" name="age" class="formItem" required/>*@
+                    @*<div id="ageAlerts">*@
+
+                    @*</div>*@
+                @*</li>*@
+                @*<br/>*@
+                @*<li>*@
+                    @*<span>Contact Number :</span>*@
+                    @*<input id="contactNumber" name="contactNumber" class="formItem" required/>*@
+                    @*<div >*@
+
+                    @*</div>*@
+                @*</li>*@
+                @*<br/>*@
+                @*<li>*@
+                    @*<span>Email :</span>*@
+                    @*<input id="email" name="email" class="formItem" required/>*@
+                    @*<div>*@
+
+                    @*</div>*@
+                @*</li>*@
+                @*<br/>*@
+                @*<button id="submit-button" type="submit" style="float: right">Submit</button>*@
+                @*<div name="errorDiv">*@
+
+                @*</div>*@
+            @*</ul>*@
+        @*</div>*@
+    @*}else{*@
+        @*<h1>*@
+            @*Welcome @data.map(_.name)*@
+            @* Welcome @data.fold("")(_.name) *@
+        @*</h1>*@
+
+    @*}*@
+
+@*}*@
+@*<form method="POST" action="/widgets">*@
+@*<h2>TODO form fields</h2>*@
+@*<button type="submit">Create widget</button>*@
+@*</form>*@
