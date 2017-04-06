@@ -11,14 +11,15 @@
 @*"email" -> email*@
 @*)(UserData.apply)(UserData.unapply)*@
 @*)*@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script type="text/javascript" src="@routes.Assets.versioned("myScript.js")"></script>
+@helper.form(action = routes.Application.userPost, 'id -> "myForm") {
+    @* <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/main.css")"/> *@
+    <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("myStyle.css")"/>
 
 
 
-@helper.form(action = routes.Application.userPost, 'id -> "myForm",'onsubmit -> "return") {
-    <link rel="stylesheet" type="text/css" href="@routes.Assets.versioned("stylesheets/main.css")"/>
-    <script type="text/javascript" src="@routes.Assets.versioned("assets/javascripts/myScript.js")"/>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 
     @*<script type="text/javascript">*@
         @*$(document).ready ->*@
@@ -72,11 +73,14 @@
 
 
     @if(!success) {
-        <h1>
-        @flash.get("success").getOrElse("Welcome! Please enter your details below")
-        </h1>
-        <div style="width: 400px">
-            <ul style="list-style: none;">
+        <span>
+            <h1>
+            @flash.get("success").getOrElse("Welcome! Please enter your details below")
+            </h1>
+        </span>
+
+        <div class="formDiv">
+            <ul>
                 <li>
                     <span>Name :</span>
                     <input id="name" name="name" class="formItem" required/>
@@ -109,10 +113,13 @@
                     @*</div>*@
                 </li>
                 <br/>
-                <button id="submit-button" type="submit" style="float: right">Submit</button>
+                <button id="submit-button" class="formButton">Submit</button>
                 <div name="errorDiv">
 
                 </div>
+                <span hidden="true" id="errorSpan">
+                    This div is hidden....
+                </span>
             </ul>
         </div>
     }else{

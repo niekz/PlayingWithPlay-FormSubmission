@@ -19,7 +19,7 @@ class Application @Inject() extends Controller {
   val userForm = Form(
     mapping(
       "name" -> nonEmptyText,
-      "age" -> number(min = 0, max = 130),
+      "age" -> number(min = 12, max = 130),
       "contactNumber" -> nonEmptyText,
       "email" -> nonEmptyText
     )(UserData.apply)(UserData.unapply)
@@ -53,9 +53,18 @@ class Application @Inject() extends Controller {
 
   def userPost = Action { implicit request =>
     userForm.bindFromRequest.fold(
+      failure => {
+        BadRequest(views.html.testForm(userForm, false, failure.value))
+      }, success => {
+        Ok(views.html.testForm(userForm, true, Some(success)))
+      }
+    )
+    /*
+    userForm.bindFromRequest.fold(
       hasErrors => {
         BadRequest(views.html.testForm(hasErrors, false, hasErrors.value))
-//        BadRequest(views.html.userPostFailure(hasErrors.value))
+        //BadRequest(views.html.userPostFailure(hasErrors.value))
+        //Ok(views.html.testForm(userForm, false, hasErrors.value))
       }, userData => {
         //    val form = userForm.bindFromRequest().get
         val name = userData.name
@@ -67,6 +76,6 @@ class Application @Inject() extends Controller {
         Ok(views.html.testForm(userForm, true, Some(userData)))
         //Redirect(routes.Application.getUserPost()).flashing("success" -> "Data passed successfully!")
       }
-    )
+    ) */
   }
 }
