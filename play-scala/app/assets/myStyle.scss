@@ -1,0 +1,47 @@
+// Use .<name> for custom classnames (class=)
+$itemWidth: 100px;
+$itemHeight: 25px;
+$fontSize: 32px;
+$h1Addition: 0px;
+$textColor: white;
+$backgroudColor: black;
+
+.formItem{
+  color: invert($textColor);
+  width: $itemWidth;
+  height:$itemHeight;
+  float: right;
+}
+.formButton{
+  color: invert($textColor);
+  height: $itemHeight + 5;
+  float: right;
+}
+
+.formDiv{
+  color: invert($textColor);
+  //background-color: invert($backgroudColor);
+  width: 425px;
+}
+
+// Use <name> for built in items (h1, h2, p, etc)
+h1{
+  color: invert($textColor);
+  background-color: invert($backgroudColor);
+  font-size:$fontSize + $h1Addition;
+}
+
+ul{
+  color: invert($textColor);
+  list-style: none;
+}
+
+li{
+  //color: invert($textColor);
+  height: $itemHeight - 15;
+}
+
+span{
+  color: invert($textColor);
+  background-color: invert($backgroudColor);
+}
